@@ -4,10 +4,10 @@
 # The .vcd file is log data from a hardware simulation run,
 # Read up on the .vcd file and what it's used for.
 
-# Most of the data, you don't need. But the lines of binary
-# are clearly some sort of data entered and processed.
+# Most of the file, we don't need, though its interesting.
+# But the lines of binary are clearly data entered and processed.
 # The binary entries with a trailing " character are apparently
-# output ('dout'), so let's use those. Throw everything else away.
+# output ('dout', in the file), so let's look at those. Toss everything else.
 
 # Excerpt:
 #   b01010000
@@ -22,11 +22,11 @@
 #   (...)
 
 # From here it's pretty obvious to interpret it as ASCII, which
-# Perl can do super quickly, if unfashionably. Make it so...
+# Perl can do super quickly, if unfashionably. Make it so!
 
 # Extract only binary outputs, toss junk, pass to Perl convert/print one-liner
-# And, voila.
 
 cat flag.vcd | egrep "^b.*\"" | sed 's/ "//g' | perl -ne 'print chr(oct($_))'
 
+# And, voila.
 PCTF{RTL_ (...redacted...)
